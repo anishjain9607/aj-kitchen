@@ -186,14 +186,14 @@ button:disabled{cursor:not-allowed;opacity:.5}
 .splash{position:fixed;inset:0;background:#090d0c;z-index:9999;display:grid;place-items:center;overflow:hidden;isolation:isolate}
 .splash.done{animation:splashOut .75s ease forwards;pointer-events:none}
 @keyframes splashOut{to{opacity:0;visibility:hidden}}
-.splash-inner{position:absolute;left:50%;top:50%;transform:translate(-50%,36px);text-align:center;z-index:2;pointer-events:none;white-space:nowrap}
+.splash-inner{position:absolute;left:50%;top:50%;transform:translate(-50%,36px);display:flex;align-items:center;justify-content:center;gap:2px;text-align:center;z-index:2;pointer-events:none;white-space:nowrap}
 .splash-kicker{font-size:9px;letter-spacing:.42em;color:#68736d;text-transform:uppercase}
-.splash-logo{margin:10px 0 0;display:flex;flex-direction:column;align-items:center;line-height:.8}
+.splash-logo{margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:.8}
 .name-script{font-family:'Bodoni Moda','DM Serif Display',Georgia,serif;font-size:clamp(54px,8vw,88px);font-weight:600;font-style:italic;letter-spacing:-.065em;color:#f1f0e9;text-shadow:0 7px 26px rgba(0,0,0,.4)}
 .name-kitchen{font-family:Inter,ui-sans-serif,sans-serif;font-size:8px;font-weight:800;letter-spacing:.62em;color:#d7f36b;margin-left:.62em;margin-top:10px}to{transform:translateX(160%)}}
 
 /* Reference-inspired SVG pan loader: the pan itself is the hero of the splash. */
-.pan-loader{position:absolute;left:calc(50% - 122px);top:50%;width:min(118px,24vw);height:min(118px,24vw);transform:translate(-50%,-38%);z-index:3;color:#e9ece7;overflow:visible}
+.pan-loader{position:relative;left:auto;top:auto;flex:0 0 auto;width:min(118px,24vw);height:min(118px,24vw);transform:translateY(2px);z-index:3;color:#e9ece7;overflow:visible}
 .pan-loader .pl{display:block;width:100%;height:100%;overflow:visible}
 .pan-loader .pl__drop,.pan-loader .pl__drop-inner,.pan-loader .pl__pan,.pan-loader .pl__ring{animation:pl-pan 2s cubic-bezier(.65,0,.35,1) infinite}
 .pan-loader .pl__drop{transform-origin:13px 60px}
@@ -230,8 +230,8 @@ button:disabled{cursor:not-allowed;opacity:.5}
 }
 
 @media(max-width:700px){
-  .splash-inner{transform:translate(-50%,36px)}
-  .pan-loader{left:calc(50% - 91px);width:min(88px,22vw);height:min(88px,22vw);transform:translate(-50%,-38%)}
+  .splash-inner{transform:translate(-50%,36px);gap:0}
+  .pan-loader{width:min(88px,22vw);height:min(88px,22vw);transform:translateY(2px);margin-right:-4px}
 
   .app{padding:0 14px 35px}.nav{height:68px}.brand-mark{width:36px;height:36px}.brand-name{font-size:12px}.brand-sub{display:none}
   .search{display:none}.nav-actions .btn{padding:10px 12px}.nav-actions .btn span{display:none}
@@ -250,34 +250,37 @@ button:disabled{cursor:not-allowed;opacity:.5}
 </head>
 <body>
 <div id="splash" class="splash">
-  <div class="pan-loader" aria-hidden="true">
-    <svg class="pl" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="A pan flipping food">
-      <clipPath id="pan-clip"><rect rx="12" ry="14" x="4" y="52" width="68" height="28" /></clipPath>
-      <defs>
-        <linearGradient id="pl-grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#000"/><stop offset="100%" stop-color="#fff"/></linearGradient>
-        <mask id="pl-mask"><rect x="0" y="0" width="88" height="80" fill="url(#pl-grad)" /></mask>
-      </defs>
-      <g fill="currentColor">
-        <g fill="none" stroke-dasharray="20 221" stroke-dashoffset="20" stroke-linecap="round" stroke-width="4">
-          <circle class="pl__ring" cx="44" cy="40" r="35" stroke="hsl(38,90%,50%)" transform="rotate(90,44,40)" />
-          <circle class="pl__ring" cx="44" cy="40" r="35" stroke="hsl(8,90%,40%)" mask="url(#pl-mask)" transform="rotate(90,44,40)" />
-        </g>
-        <g fill="hsla(223,10%,70%,0)">
-          <g class="pl__drop pl__drop--1"><circle class="pl__drop-inner" cx="13" cy="60" r="2" /></g>
-          <g class="pl__drop pl__drop--2"><circle class="pl__drop-inner" cx="13" cy="60" r="2" /></g>
-          <g class="pl__drop pl__drop--3"><circle class="pl__drop-inner" cx="67" cy="72" r="2" /></g>
-          <g class="pl__drop pl__drop--4"><circle class="pl__drop-inner" cx="67" cy="72" r="2" /></g>
-          <g class="pl__drop pl__drop--5"><circle class="pl__drop-inner" cx="67" cy="72" r="2" /></g>
-        </g>
-        <g class="pl__pan">
-          <rect rx="2" ry="2" x="4" y="66" width="68" height="14" clip-path="url(#pan-clip)" />
-          <rect rx="2" ry="2" x="76" y="66" width="48" height="7" />
-        </g>
-      </g>
-    </svg>
-  </div>
   <div class="splash-inner">
-    <div class="splash-logo"><span class="name-script">Anish</span><span class="name-kitchen">KITCHEN</span></div>
+    <div class="pan-loader" aria-hidden="true">
+      <svg class="pl" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="A pan flipping food">
+        <clipPath id="pan-clip"><rect rx="12" ry="14" x="4" y="52" width="68" height="28" /></clipPath>
+        <defs>
+          <linearGradient id="pl-grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#000"/><stop offset="100%" stop-color="#fff"/></linearGradient>
+          <mask id="pl-mask"><rect x="0" y="0" width="88" height="80" fill="url(#pl-grad)" /></mask>
+        </defs>
+        <g fill="currentColor">
+          <g fill="none" stroke-dasharray="20 221" stroke-dashoffset="20" stroke-linecap="round" stroke-width="4">
+            <circle class="pl__ring" cx="44" cy="40" r="35" stroke="hsl(38,90%,50%)" transform="rotate(90,44,40)" />
+            <circle class="pl__ring" cx="44" cy="40" r="35" stroke="hsl(8,90%,40%)" mask="url(#pl-mask)" transform="rotate(90,44,40)" />
+          </g>
+          <g fill="hsla(223,10%,70%,0)">
+            <g class="pl__drop pl__drop--1"><circle class="pl__drop-inner" cx="13" cy="60" r="2" /></g>
+            <g class="pl__drop pl__drop--2"><circle class="pl__drop-inner" cx="13" cy="60" r="2" /></g>
+            <g class="pl__drop pl__drop--3"><circle class="pl__drop-inner" cx="67" cy="72" r="2" /></g>
+            <g class="pl__drop pl__drop--4"><circle class="pl__drop-inner" cx="67" cy="72" r="2" /></g>
+            <g class="pl__drop pl__drop--5"><circle class="pl__drop-inner" cx="67" cy="72" r="2" /></g>
+          </g>
+          <g class="pl__pan">
+            <rect rx="2" ry="2" x="4" y="66" width="68" height="14" clip-path="url(#pan-clip)" />
+            <rect rx="2" ry="2" x="76" y="66" width="48" height="7" />
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div class="splash-logo">
+      <span class="name-script">Anish</span>
+      <span class="name-kitchen">KITCHEN</span>
+    </div>
   </div>
 </div>
 
